@@ -7,11 +7,10 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import sauce.authentication.actions.LoginActions;
 import sauce.inventory.InventoryPage;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static sauce.authentication.actions.User.STANDARD_USER;
+import static sauce.authentication.User.STANDARD_USER;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 public class WhenLoggingIn {
