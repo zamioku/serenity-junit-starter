@@ -3,6 +3,7 @@ package sauce.inventory;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -37,6 +38,20 @@ public class WhenViewingHighlightedProducts {
     }
 
     @Test
+    public void highlightedProductsShouldDisplayTheCorrespondingImages() {
+        login.as(STANDARD_USER);
+
+        List<String> productsOnDisplay = productList.titles();
+
+        SoftAssertions softly = new SoftAssertions();  // Will not fail immediately
+
+        productsOnDisplay.forEach(
+                productName -> softly.assertThat(productList.imageTextForProduct(productName)).isEqualTo(productName)
+        );
+        softly.assertAll();
+    }
+
+    @Test
     public void shouldDisplayCorrectProductDetailsPage() {
         login.as(STANDARD_USER);
 
@@ -45,5 +60,7 @@ public class WhenViewingHighlightedProducts {
         productList.openProductDetailsFor(firstItemName);
 
         assertThat(productDetails.productName()).isEqualTo(firstItemName);
+
+        productDetails.productImageWithAltValueOf(firstItemName).shouldBeVisible();
     }
 }
