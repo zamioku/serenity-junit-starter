@@ -5,14 +5,14 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-public class ProductListPage extends PageObject {
+public class ProductList extends PageObject {
 
     public List<String> titles() {
         return findAll(".inventory_item_name").textContents();
     }
 
-    public void openProductDetailsFor(String itemName) {
-        find(By.linkText(itemName)).click();
+    public static By productDetailsLinkFor(String itemName) {
+        return By.linkText(itemName);
     }
 
     public String imageTextForProduct(String productName) {
