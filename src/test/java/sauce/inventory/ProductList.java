@@ -23,7 +23,7 @@ public class ProductList extends PageObject {
         return $("//div[@class='inventory_item'][contains(.,'" + productName + "')]//img").getAttribute("alt");
     }
 
-    List<String> getFirstNProductTitlesDisplayed(int n) {
+    public List<String> getFirstNProductTitlesDisplayed(int n) {
         return titles().subList(0, n);
     }
 }
